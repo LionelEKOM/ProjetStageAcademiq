@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dossier index{% endblock %}
+
+{% block body %}
+    <h1>Dossier index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Clinique</th>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Age</th>
+                <th>Sexe</th>
+                <th>Email</th>
+                <th>Adresse</th>
+                <th>Phone</th>
+                <th>Profession</th>
+                <th>Taille</th>
+                <th>Poids</th>
+                <th>CreatedAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for dossier in dossiers %}
+            <tr>
+                <td>{{ dossier.id }}</td>
+                <td>{{ dossier.clinique }}</td>
+                <td>{{ dossier.firstname }}</td>
+                <td>{{ dossier.lastname }}</td>
+                <td>{{ dossier.age }}</td>
+                <td>{{ dossier.sexe }}</td>
+                <td>{{ dossier.email }}</td>
+                <td>{{ dossier.adresse }}</td>
+                <td>{{ dossier.phone }}</td>
+                <td>{{ dossier.profession }}</td>
+                <td>{{ dossier.taille }}</td>
+                <td>{{ dossier.poids }}</td>
+                <td>{{ dossier.createdAt ? dossier.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_admin_dossier_show', {'id': dossier.id}) }}">show</a>
+                    <a href="{{ path('app_admin_dossier_edit', {'id': dossier.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="14">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_admin_dossier_new') }}">Create new</a>
+{% endblock %}

@@ -1,31 +1,125 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block title %}Authentification
+{% endblock %}
+
+{% block stylesheets %}
+	<style>
+
+		* {
+			box-sizing: border-box;
+			margin: 0;
+			padding: 0;
+		}
+		:root {
+			--line-border-fill: #3498db;
+			--line-border-empty: #e0e0e0;
+			--dark-green: #013237;
+			--light-green: #4fa574;
+			--white-50: rgba(255, 255, 255, 0.5);
+		}
+
+		body {
+			height: 80vh;
+			font-family: 'Roboto', sans-serif;
+		}
+		.container-fluid {
+			height: 100vh;
+			width: 100%;
+			position: relative;
+			background-image: url("assets/img/pharmacienne.jpg");
+			background-color: var(--dark-green);
+			background-blend-mode: multiply;
+			background-size: cover;
+			background-position: center;
+			display: flex;
+			flex-direction: column;
+			justify-content: flex-start;
+			align-items: center;
+		}
+
+		.logo {
+			margin: 20px 0;
+			display: flex;
+			align-items: center;
+		}
+
+		.logo img {
+			width: 87px;
+			height: 75px;
+		}
+
+		.logo span {
+			font-weight: 700;
+			color: #fff;
+			font-size: 77px;
+		}
+
+		span.text-green-light {
+			color: var(--light-green);
+		}
+
+		.text-field {
+			margin-bottom: 20px;
+			color: white;
+			display: flex;
+			align-items: center;
+		}
+
+		.icon {
+			color: var(--white-50);
+		}
+	</style>
+{% endblock %}
 
 {% block body %}
-<form method="post">
-    {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
+	<section class="container-fluid">
+		<div class="logo">
+			<img src="assets/img/Logo.png" alt="">
+			<span class="">
+				Medi<span class="text-green-light">Serve</span>
+			</span>
+		</div>
+		<div class="wrapper">
+			<div class="row">
+				<div class="col">
+					<form class="login-form" method="post">
+						{% if error %}
+							<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+						{% endif %}
 
-    {% if app.user %}
-        <div class="mb-3">
-            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
-        </div>
-    {% endif %}
+						{% if app.user %}
+							<div class="mb-3">
+								Vous êtes connecté en tant que
+								{{ app.user.userIdentifier }},
+								<a href="{{ path('app_logout') }}">Se déconnecter</a>
+							</div>
+						{% endif %}
 
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputEmail">Email</label>
-    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
-    <label for="inputPassword">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+						<b>
+							<h1 class="h3 mt-3 mb-3 font-weight-normal text-light text-center">Veuillez vous connecter!!</h1>
+						</b>
+						<b>
+							<i class="icon fa-solid fa-user"></i>
+							<label class="text-light my-2" for="inputEmail">Email</label>
+							<input
+							type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" placeholder="Email" autocomplete="email" required autofocus>
+							{# <label for="inputEmail">Email</label>
+																												<input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" > #}
+							<i class="icon fa-solid fa-lock my-3"></i>
+							<label class="text-light my-2" for="inputPassword">Mot de passe</label>
+							<input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" placeholder="Mot de passe">
 
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
+							<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+							<div class="d-grid gap-2">
+								<button class="btn btn-primary my-3" type="submit">
+									Connexion
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</section>
+	{% endblock %}
 
-    <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
-    </button>
-</form>
-{% endblock %}

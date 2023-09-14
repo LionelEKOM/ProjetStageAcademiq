@@ -1,0 +1,66 @@
+<nav class="navbar navbar-expand px-3 border-bottom">
+		<!-- Button for sidebar toggle -->
+		<button class="btn bg-dark" type="button" data-bs-theme="dark">
+			<i class="fa-solid fa-bars" style="color: #ecf1f8;"></i>
+		</button>
+		<h3>
+			<b>
+                <span class="text-dark py-4 px-2">
+                    DOSSIER MEDICAL
+                </span>
+            </b>
+		</h3>
+		
+		<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+			{% if app.user %}
+                <form class="d-flex">
+                    <input class="form-control" type="search" placeholder="Rechercher" aria-label="Search">
+                    <button class="btn" type="submit">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </form>
+				<li class="nav-item dropdown text-center text-light">
+					<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+						<i class="fa-solid fa-circle-user"></i>
+						Mon Compte
+					</a>
+					<ul class="dropdown-menu">
+						<li>
+							<a class="dropdown-item" href="#">
+								<i class="fa-solid fa-user"></i>
+								{{app.user.Title}}
+							</a>
+						</li>
+						<li><hr class="dropdown-divider"></li>
+						<li class="nav-item">
+							<a class="nav-link" href="{{ path('app_logout')}}">
+								<i class="fa-solid fa-gear"></i>
+								Parametres
+							</a>
+						</li>
+						<li><hr class="dropdown-divider"></li>
+						<li class="nav-item">
+							<a class="nav-link" href="{{ path('app_logout')}}">
+								<i class="fa-solid fa-bell"></i>
+								Notification()
+							</a>
+						</li>
+							<li><hr class="dropdown-divider"></li>
+						<li class="nav-item">
+							<a class="nav-link" href="{{ path('app_logout')}}">
+								<i class="fa-solid fa-right-from-bracket"></i>
+								Deconnexion</a>
+						</li>
+					</ul>
+				</li>
+
+
+			{% else %}
+				<li class="nav-item">
+					<a class="nav-link" href="{{ path('app_login')}}">
+						<i class="fa-solid fa-right-to-bracket"></i>
+						Connexion</a>
+				</li>
+			{% endif %}
+		</ul>
+	</nav>

@@ -1,0 +1,21 @@
+{# {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }} #}
+
+{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+
+{{ form_row(form.firstname, {'attr': {'class': 'form-control'}}) }}
+{{ form_row(form.lastname, {'attr': {'class': 'form-control'}}) }}
+{{ form_row(form.age, {'attr': {'class': 'form-control'}}) }}
+{{ form_row(form.sexe, {'attr': {'class': 'form-select'}}) }}
+{{ form_row(form.email, {'attr': {'class': 'form-control'}}) }}
+{{ form_row(form.adresse, {'attr': {'class': 'form-control'}}) }}
+{{ form_row(form.phone, {'attr': {'class': 'form-control'}}) }}
+{{ form_row(form.profession, {'attr': {'class': 'form-control'}}) }}
+{{ form_row(form.taille, {'attr': {'class': 'form-control'}}) }}
+{{ form_row(form.poids, {'attr': {'class': 'form-control'}}) }}
+
+<button type="submit" class="btn btn-lg btn-success mt-2">Crée</button>
+
+{{ form_end(form) }}

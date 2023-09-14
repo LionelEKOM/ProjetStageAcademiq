@@ -24,32 +24,32 @@
                 <td>{{ user.password }}</td>
             </tr>
             <tr>
-                <th>FirstName</th>
-                <td>{{ user.FirstName }}</td>
+                <th>Firstname</th>
+                <td>{{ user.firstname }}</td>
             </tr>
             <tr>
-                <th>LastName</th>
-                <td>{{ user.LastName }}</td>
+                <th>Lastname</th>
+                <td>{{ user.lastname }}</td>
             </tr>
             <tr>
                 <th>Sexe</th>
-                <td>{{ user.Sexe }}</td>
+                <td>{{ user.sexe }}</td>
+            </tr>
+            <tr>
+                <th>Phone</th>
+                <td>{{ user.phone }}</td>
             </tr>
             <tr>
                 <th>Fonction</th>
-                <td>{{ user.Fonction }}</td>
-            </tr>
-            <tr>
-                <th>Telephone</th>
-                <td>{{ user.Telephone }}</td>
+                <td>{{ user.fonction }}</td>
             </tr>
             <tr>
                 <th>Title</th>
-                <td>{{ user.Title }}</td>
+                <td>{{ user.title }}</td>
             </tr>
             <tr>
                 <th>CreatedAt</th>
-                <td>{{ user.CreatedAt ? user.CreatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ user.createdAt ? user.createdAt|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
         </tbody>
     </table>
