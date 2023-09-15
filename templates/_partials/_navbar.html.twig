@@ -6,7 +6,10 @@
 		<h3>
 			<b>
                 <span class="text-dark py-4 px-2">
-                    DOSSIER MEDICAL
+					{% if app.user %}
+						<b>{{ app.user.title }}</b>
+					{% endif %}
+                    {# DOSSIER MEDICAL #}
                 </span>
             </b>
 		</h3>

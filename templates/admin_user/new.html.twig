@@ -3,9 +3,8 @@
 {% block title %}New User{% endblock %}
 
 {% block body %}
-    <h1>Create new User</h1>
+    {% include '_partials/_navbar.html.twig' %}
+    <strong><h1 class="text-center mt-4">Crée un nouvel utilisateur</h1></strong>
 
     {{ include('admin_user/_form.html.twig') }}
-
-    <a href="{{ path('app_admin_user_index') }}">back to list</a>
 {% endblock %}

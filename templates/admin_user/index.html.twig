@@ -1,86 +1,114 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}User index{% endblock %}
+{% block title %}Liste des utilisateurs
+{% endblock %}
 
 {% block body %}
-    <div class="">
-        {% for type, messages in app.flashes() %}
-            <div class="">
-                {% for message in messages %}
-                    <div class=" text-center alert alert-{{ type }}">
-                        {{ message }}
+
+	<div class="wrapper">
+		{% include '_partials/asidebar.html.twig' %}
+		<div class="main">
+			{% include '_partials/_navbar.html.twig' %}
+			<div class="container">
+				<div class="">
+					{% for type, messages in app.flashes() %}
+						<div class="">
+							{% for message in messages %}
+								<div class=" text-center alert alert-{{ type }}" role="alert">
+									{{ message }}
+								</div>
+							{% endfor %}
+						</div>
+					{% endfor %}
+				</div>
+                <div class="row mt-3">
+                    <div class="col-9">
+                        <h1>Liste des utilisateurs</h1>
                     </div>
-                {% endfor %}
-            </div>
-        {% endfor %}
-    </div>
-    <h1>User index</h1>
+                    <div class="col-3 text-end">
+                        <a class="btn btn-success mt-2" href="{{ path('app_admin_user_new') }}">
+                        <i class="fa-solid fa-user-plus"></i>
+                        Nouv. Utilisateur</a>
+                    </div>
+                </div>
+                <hr class="border border-danger border-2 opacity-50">   
+				<table class="table">
+					<thead>
+						<tr>
+							{# <th>Id</th> #}
+							<th>Email</th>
+							{# <th>Roles</th> #}
+							{# <th>Password</th> #}
+							<th>Prénom</th>
+							<th>Nom</th>
+							<th>Sexe</th>
+							<th>Téléphone</th>
+							<th>Fonction</th>
+							<th>Titre</th>
+							<th>Date création</th>
+							<th>Actions</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for user in users %}
+							<tr>
+								{# <td>{{ user.id }}</td> #}
+								<td>{{ user.email }}</td>
+								{# <td>{{ user.roles ? user.roles|json_encode : '' }}</td> #}
+								{# <td>{{ user.password }}</td> #}
+								<td>{{ user.firstname }}</td>
+								<td>{{ user.lastname }}</td>
+								<td>{{ user.sexe }}</td>
+								<td>{{ user.phone }}</td>
+								<td>{{ user.fonction }}</td>
+								<td>{{ user.title }}</td>
+								<td>{{ user.createdAt ? user.createdAt|date('Y-m-d')}}</td>
+								<td>
+									<a class="px-2" href="{{ path('app_admin_user_show', {'id': user.id}) }}">
+                                        <i class="fa-brands fa-readme"></i>
+                                    </a>
+									<a href="{{ path('app_admin_user_edit', {'id': user.id}) }}">
+                                        <i class="fa-regular fa-pen-to-square"></i>
+                                    </a>
+								</td>
+							</tr>
+						{% else %}
+							<tr>
+								<td colspan="12">no records found</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
 
-    <table class="table">
-        <thead>
-            <tr>
-                {# <th>Id</th> #}
-                <th>Email</th>
-                {# <th>Roles</th> #}
-                {# <th>Password</th> #}
-                <th>Firstname</th>
-                <th>Lastname</th>
-                <th>Sexe</th>
-                <th>Phone</th>
-                <th>Fonction</th>
-                <th>Title</th>
-                <th>CreatedAt</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for user in users %}
-            <tr>
-                {# <td>{{ user.id }}</td> #}
-                <td>{{ user.email }}</td>
-                {# <td>{{ user.roles ? user.roles|json_encode : '' }}</td> #}
-                {# <td>{{ user.password }}</td> #}
-                <td>{{ user.firstname }}</td>
-                <td>{{ user.lastname }}</td>
-                <td>{{ user.sexe }}</td>
-                <td>{{ user.phone }}</td>
-                <td>{{ user.fonction }}</td>
-                <td>{{ user.title }}</td>
-                <td>{{ user.createdAt ? user.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('app_admin_user_show', {'id': user.id}) }}">show</a>
-                    <a href="{{ path('app_admin_user_edit', {'id': user.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="12">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+				{# <div class="row">
+					<div class="col-9">
+						<h1>Historique consultation</h1>
+						<hr class="border border-danger border-2 opacity-50">
+					</div>
+					<div class="col-3 text-end">
+						<div class="dropdown">
+							<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+								action
+							</button>
+							<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+								<li>
+									<a class="dropdown-item" href="#">Ajouter</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href="#">Editer</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href="#">Supprimer</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<hr>
+				<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, laborum. Sunt ut cupiditate, magni animi fuga ipsam ad, ullam in totam at facere laudantium suscipit.</p>				 #}
+			</div>
+		</div>
+	</div>
 
-    <div class="row">
-    <div class="col-9">
-        <h1>Historique consultation</h1>
-        <hr class="border border-danger border-2 opacity-50">
-    </div>
-    <div class="col-3 text-end">
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                action
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <li><a class="dropdown-item" href="#">Ajouter</a></li>
-                <li><a class="dropdown-item" href="#">Editer</a></li>
-                <li><a class="dropdown-item" href="#">Supprimer</a></li>
-            </ul>
-        </div>
-    </div>
-</div>
-<hr>
-<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, laborum. Sunt ut cupiditate, magni animi fuga ipsam ad, ullam in totam at facere laudantium suscipit.</p>
-
-
-    <a href="{{ path('app_admin_user_new') }}">Create new</a>
 {% endblock %}
+

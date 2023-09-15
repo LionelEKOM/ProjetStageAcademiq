@@ -110,9 +110,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getRoles(): array
     {
-        $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
+        // $roles = $this->roles;
+        // // guarantee every user at least has ROLE_USER
+        // $roles[] = 'ROLE_USER';
+
+        if ($this->title === 'Médecin') {
+            $roles[] = "ROLE_MEDECIN";
+        } elseif ($this->title === 'Infirmier') {
+            $roles[] = "ROLE_INFIRMIER";
+        } elseif ($this->title === 'ADMIN') {
+            $roles[] = "ROLE_ADMIN";
+        }
 
         return array_unique($roles);
     }
@@ -160,6 +168,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function Fullname(): ?string
+    {
+        return $this->getFirstname() . ' ' . $this->getLastname();
+    }
     public function getLastname(): ?string
     {
         return $this->lastname;
@@ -231,6 +243,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return $this->firstname . ' ' . $this->lastname; // Remplacez "name" par le champ approprié de votre entité Dossier
+    }
+
 
     /**
      * @return Collection<int, Antecedent>

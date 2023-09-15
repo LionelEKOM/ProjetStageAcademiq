@@ -2,7 +2,7 @@
 	<div class="h-100">
 		<div class="sidebar-logo text-center">
             <div class="marque">
-                <img src="assets/img/Logo.png" alt="">
+                <img src="{{asset('assets/img/logo.png')}}" alt="">
                 <span class="">
                     Medi<span class="text-green-light">Serve</span>
                 </span>
@@ -18,12 +18,17 @@
 					<li class="sidebar-item my-2">
 						<a class="nav-link" href="#">
 							<i class="fa-solid fa-calendar-days" style="color: #ffffff;"></i>
-							Rendez-vous</a>
+							Antecedents</a>
+					</li>
+					<li class="sidebar-item my-2">
+						<a class="nav-link" href="#">
+							<i class="fa-solid fa-calendar-days" style="color: #ffffff;"></i>
+							Consultations</a>
 					</li>
 					<li class="sidebar-item my-2">
 						<a class="nav-link" href="#">
 							<i class="fa-solid fa-chart-gantt" style="color: #ffffff;"></i>
-							Autorisations</a>
+							Dossiers</a>
 					</li>
 
 					<li class="nav-item dropdown text-light my-2">
@@ -33,25 +38,25 @@
 						</a>
 						<ul class="dropdown-menu">
 							<li>
-								<a class="dropdown-item" href="{{path('app_admin_user_new')}}">
+								<a class="dropdown-item text-dark" href="{{path('app_admin_user_new')}}">
 									<i class="fa-solid fa-plus"></i>
 									Ajouter</a>
 							</li>
 							<li>
-								<a class="dropdown-item" href="#">
+								<a class="dropdown-item text-dark" href="#">
 									<i class="fa-solid fa-user-pen"></i>
 									Editer
 								</a>
 							</li>
 							<li>
-								<a class="dropdown-item" href="{{path('app_admin_user_index')}}">
+								<a class="dropdown-item text-dark" href="{{path('app_admin_user_index')}}">
 									<i class="fa-solid fa-list"></i>
 									Afficher
 								</a>
 							</li>
 							<li><hr class="dropdown-divider"></li>
 							<li>
-								<a class="dropdown-item" href="#">Something else here</a>
+								<a class="dropdown-item text-dark" href="#">Something else here</a>
 							</li>
 						</ul>
 					</li>

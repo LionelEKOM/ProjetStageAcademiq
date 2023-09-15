@@ -3,28 +3,28 @@
 {% block title %}Consultation index{% endblock %}
 
 {% block body %}
-    <h1>Consultation</h1>
+    <h1>Consultation index</h1>
 
     <table class="table">
         <thead>
             <tr>
-                {# <th>Id</th> #}
-                <th>Date création</th>
+                <th>Id</th>
+                <th>CreatedAt</th>
                 <th>Motif</th>
-                <th>Medecin Traitant</th>
-                <th>Actions</th>
+                <th>Traitant</th>
+                <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for consultation in consultations %}
             <tr>
                 <td>{{ consultation.id }}</td>
-                <td>{{ consultation.createdAt ? consultation.createdAt|date('Y-m-d') }}</td>
+                <td>{{ consultation.createdAt ? consultation.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ consultation.motif }}</td>
                 <td>{{ consultation.traitant }}</td>
                 <td>
-                    <a href="{{ path('app_admin_consultation_show', {'id': consultation.id}) }}">show</a>
-                    <a href="{{ path('app_admin_consultation_edit', {'id': consultation.id}) }}">edit</a>
+                    <a href="{{ path('app_infirmier_consultation_show', {'id': consultation.id}) }}">show</a>
+                    <a href="{{ path('app_infirmier_consultation_edit', {'id': consultation.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -35,5 +35,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_admin_consultation_new') }}">Ajouter</a>
+    <a href="{{ path('app_infirmier_consultation_new') }}">Create new</a>
 {% endblock %}

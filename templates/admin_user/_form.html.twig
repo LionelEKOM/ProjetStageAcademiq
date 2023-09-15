@@ -1,56 +1,82 @@
 <div class="container">
-    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+	{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
 
-<div class="mb-3">
-    <b>{{ form_label(form.email) }}</b>
-    {{ form_widget(form.email, { 'attr': { 'class': 'form-control', 'placeholder': 'Email' } }) }}
-    {{ form_errors(form.email) }}
-</div>
+	<div class="row mx-auto w-50 d-flex justify-content-center">
+		<div class="col-md-6 mb-2">
+			<b>{{ form_label(form.firstname) }}</b>
+			{{ form_widget(form.firstname, { 'attr': { 'class': 'form-control', 'placeholder': 'Prénom', 'autofocus': 'autofocus' } }) }}
+			{{ form_errors(form.firstname) }}
+		</div>
+		<div class="col-md-6">
+			<b>{{ form_label(form.lastname) }}</b>
+			{{ form_widget(form.lastname, { 'attr': { 'class': 'form-control', 'placeholder': 'Nom' } }) }}
+			{{ form_errors(form.lastname) }}
+		</div>
+	</div>
 
-<div class="mb-3">
-    <b>{{ form_label(form.plainPassword) }}</b>
-    {{ form_widget(form.plainPassword, { 'attr': { 'class': 'form-control', 'placeholder': 'Mot de passe' } }) }}
-    {{ form_errors(form.plainPassword) }}
-</div>
+	<div class="row mx-auto w-50">
+        <div class="col-md-12">
+			<b>{{ form_label(form.email) }}</b>
+			{{ form_widget(form.email, { 'attr': { 'class': 'form-control', 'placeholder': 'Ashuka@gmail.com' } }) }}
+			{{ form_errors(form.email) }}
+		</div>
+		<div class="col-md-12">
+			<div class="mb-3">
+				<b>{{ form_label(form.plainPassword) }}</b>
+				{{ form_widget(form.plainPassword, { 'attr': { 'class': 'form-control', 'placeholder': 'Mot de passe' } }) }}
+				{{ form_errors(form.plainPassword) }}
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="mb-3">
+				<b>{{ form_label(form.sexe) }}</b>
+				{{ form_widget(form.sexe, { 'attr': { 'class': 'form-select' } }) }}
+				{{ form_errors(form.sexe) }}
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="mb-3">
+				<b>{{ form_label(form.fonction) }}</b>
+				{{ form_widget(form.fonction, { 'attr': { 'class': 'form-select' } }) }}
+				{{ form_errors(form.fonction) }}
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="mb-3">
+				<b>{{ form_label(form.phone) }}</b>
+				{{ form_widget(form.phone, { 'attr': { 'class': 'form-control', 'placeholder': '659160779' } }) }}
+				{{ form_errors(form.phone) }}
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="mb-3">
+				<b>{{ form_label(form.title) }}</b>
+				{{ form_widget(form.title, { 'attr': { 'class': 'form-select' } }) }}
+				{{ form_errors(form.title) }}
+			</div>
 
-<div class="mb-3">
-    <b>{{ form_label(form.firstname) }}</b>
-    {{ form_widget(form.firstname, { 'attr': { 'class': 'form-control', 'placeholder': 'Prénom' } }) }}
-    {{ form_errors(form.firstname) }}
-</div>
+		</div>
 
-<div class="mb-3">
-    <b>{{ form_label(form.lastname) }}</b>
-    {{ form_widget(form.lastname, { 'attr': { 'class': 'form-control', 'placeholder': 'Nom' } }) }}
-    {{ form_errors(form.lastname) }}
-</div>
-
-<div class="mb-3">
-    <b>{{ form_label(form.sexe) }}</b>
-    {{ form_widget(form.sexe, { 'attr': { 'class': 'form-select' } }) }}
-    {{ form_errors(form.sexe) }}
-</div>
-
-<div class="mb-3">
-   <b>{{ form_label(form.fonction) }}</b>
-    {{ form_widget(form.fonction, { 'attr': { 'class': 'form-select' } }) }}
-    {{ form_errors(form.fonction) }}
-</div>
-
-<div class="mb-3">
-    <b>{{ form_label(form.phone) }}</b>
-    {{ form_widget(form.phone, { 'attr': { 'class': 'form-control', 'placeholder': '659160779' } }) }}
-    {{ form_errors(form.phone) }}
-</div>
-
-<div class="mb-3">
-    <b>{{ form_label(form.title) }}</b>
-    {{ form_widget(form.title, { 'attr': { 'class': 'form-select' } }) }}
-    {{ form_errors(form.title) }}
-</div>
-
-<button type="submit" class="btn btn-lg btn-success mt-2">Crée</button>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-lg btn-success mt-2">
+                    <i class="fa-solid fa-check"></i>
+                    Valider</button>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="d-grid gap-2">
+                    <a class="btn btn-lg btn-warning mt-2" href="{{ path('app_admin_user_index') }}">
+                    <i class="fa-solid fa-rotate-left"></i>
+                    Retour
+                    </a>
+                </div>
+            </div>
+        </div>
+	</div>
 
 </div>
 
 {{ form_end(form) }}
+
