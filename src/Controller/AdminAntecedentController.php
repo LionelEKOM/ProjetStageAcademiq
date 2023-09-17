@@ -26,6 +26,8 @@ class AdminAntecedentController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $antecedent = new Antecedent();
+        $antecedent->setCreatedAt(new \DateTimeImmutable());
+        $antecedent->setUser($this->getUser());
         $form = $this->createForm(AntecedentType::class, $antecedent);
         $form->handleRequest($request);
 

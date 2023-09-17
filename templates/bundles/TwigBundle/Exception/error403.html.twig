@@ -1,0 +1,22 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Erreur 403 - Accès refusé
+{% endblock %}
+
+{% block body %}
+    <body>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-6 offset-md-3 text-center">
+                <h1 class="display-4">Erreur 403</h1>
+                <p class="lead">Accès refusé. Vous n'êtes pas autorisé à accéder à cette page.</p>
+                <p>Vous pouvez revenir à la <a href="javascript:history.back()">revenir à la page précédente</a> ou contacter l'administrateur du site.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lien vers Bootstrap JS (facultatif) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+</body>
+{% endblock %}

@@ -2,13 +2,15 @@
 
 namespace App\Form;
 
+use App\Entity\User;
 use App\Entity\Consultation;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use App\Entity\User;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class ConsultationType extends AbstractType
 {
@@ -16,7 +18,11 @@ class ConsultationType extends AbstractType
     {
         $builder
             // ->add('createdAt')
-            ->add('motif')
+            ->add('motif', TextareaType::class, [
+                'constraints' => [
+                    new NotBlank(['message' => 'Ce champs ne peut pas être vide.']),
+                ],
+            ])
             ->add('traitant', EntityType::class, [
                 'class' => User::class, // L'entité que vous souhaitez afficher dans le select
                 'query_builder' => function (EntityRepository $er) {

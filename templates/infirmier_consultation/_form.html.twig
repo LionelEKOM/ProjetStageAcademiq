@@ -1,4 +1,12 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+<b>{{ form_widget(form) }}</b>
+<div class="col">
+	<div class="d-grid gap-2">
+		<button type="submit" class="btn btn-lg btn-success mt-2">
+			<i class="fa-solid fa-check"></i>
+			Valider</button>
+	</div>
+</div>
+{# <button class="btn btn-success">{{ button_label|default('Enregistrer') }}</button> #}
 {{ form_end(form) }}
+

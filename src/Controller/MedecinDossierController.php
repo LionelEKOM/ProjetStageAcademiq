@@ -22,60 +22,70 @@ class MedecinDossierController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_medecin_dossier_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        $dossier = new Dossier();
-        $form = $this->createForm(Dossier1Type::class, $dossier);
-        $form->handleRequest($request);
+    // #[Route('/new', name: 'app_medecin_dossier_new', methods: ['GET', 'POST'])]
+    // public function new(Request $request, EntityManagerInterface $entityManager): Response
+    // {
+    //     $dossier = new Dossier();
+    //     $form = $this->createForm(Dossier1Type::class, $dossier);
+    //     $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($dossier);
-            $entityManager->flush();
+    //     if ($form->isSubmitted() && $form->isValid()) {
+    //         $entityManager->persist($dossier);
+    //         $entityManager->flush();
 
-            return $this->redirectToRoute('app_medecin_dossier_index', [], Response::HTTP_SEE_OTHER);
-        }
+    //         return $this->redirectToRoute('app_medecin_dossier_index', [], Response::HTTP_SEE_OTHER);
+    //     }
 
-        return $this->render('medecin_dossier/new.html.twig', [
-            'dossier' => $dossier,
-            'form' => $form,
-        ]);
-    }
+    //     return $this->render('medecin_dossier/new.html.twig', [
+    //         'dossier' => $dossier,
+    //         'form' => $form,
+    //     ]);
+    // }
 
     #[Route('/{id}', name: 'app_medecin_dossier_show', methods: ['GET'])]
     public function show(Dossier $dossier): Response
     {
+        $consultations = $dossier->getConsultations();
+        $antecedents = $dossier->getAntecedents();
+        $ordonnances = $dossier->getOrdonnances();
+        $rdvs = $dossier->getRdv();
+        $examens = $dossier->getExamens();
         return $this->render('medecin_dossier/show.html.twig', [
             'dossier' => $dossier,
+            'consultations' => $consultations, 
+            'antecedents' => $antecedents,
+            'ordonnances' => $ordonnances, 
+            'examens' => $examens,
+            'rdvs' => $rdvs
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_medecin_dossier_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Dossier $dossier, EntityManagerInterface $entityManager): Response
-    {
-        $form = $this->createForm(Dossier1Type::class, $dossier);
-        $form->handleRequest($request);
+    // #[Route('/{id}/edit', name: 'app_medecin_dossier_edit', methods: ['GET', 'POST'])]
+    // public function edit(Request $request, Dossier $dossier, EntityManagerInterface $entityManager): Response
+    // {
+    //     $form = $this->createForm(Dossier1Type::class, $dossier);
+    //     $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
+    //     if ($form->isSubmitted() && $form->isValid()) {
+    //         $entityManager->flush();
 
-            return $this->redirectToRoute('app_medecin_dossier_index', [], Response::HTTP_SEE_OTHER);
-        }
+    //         return $this->redirectToRoute('app_medecin_dossier_index', [], Response::HTTP_SEE_OTHER);
+    //     }
 
-        return $this->render('medecin_dossier/edit.html.twig', [
-            'dossier' => $dossier,
-            'form' => $form,
-        ]);
-    }
+    //     return $this->render('medecin_dossier/edit.html.twig', [
+    //         'dossier' => $dossier,
+    //         'form' => $form,
+    //     ]);
+    // }
 
-    #[Route('/{id}', name: 'app_medecin_dossier_delete', methods: ['POST'])]
-    public function delete(Request $request, Dossier $dossier, EntityManagerInterface $entityManager): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$dossier->getId(), $request->request->get('_token'))) {
-            $entityManager->remove($dossier);
-            $entityManager->flush();
-        }
+    // #[Route('/{id}', name: 'app_medecin_dossier_delete', methods: ['POST'])]
+    // public function delete(Request $request, Dossier $dossier, EntityManagerInterface $entityManager): Response
+    // {
+    //     if ($this->isCsrfTokenValid('delete'.$dossier->getId(), $request->request->get('_token'))) {
+    //         $entityManager->remove($dossier);
+    //         $entityManager->flush();
+    //     }
 
-        return $this->redirectToRoute('app_medecin_dossier_index', [], Response::HTTP_SEE_OTHER);
-    }
+    //     return $this->redirectToRoute('app_medecin_dossier_index', [], Response::HTTP_SEE_OTHER);
+    // }
 }

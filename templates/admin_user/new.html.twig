@@ -3,8 +3,16 @@
 {% block title %}New User{% endblock %}
 
 {% block body %}
-    {% include '_partials/_navbar.html.twig' %}
-    <strong><h1 class="text-center mt-4">Crée un nouvel utilisateur</h1></strong>
 
-    {{ include('admin_user/_form.html.twig') }}
+<div class="wrapper">
+    {% include '_partials/asidebar.html.twig' %}
+    <div class="main">
+        {% include '_partials/_navbar.html.twig' %}
+            <div class="container">
+                <strong><h1 class="text-center mt-4">Crée un nouvel utilisateur</h1></strong>
+                {{ include('admin_user/_form.html.twig') }}
+            </div>
+    </div>
+</div>
+    
 {% endblock %}

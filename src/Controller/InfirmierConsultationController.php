@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Consultation;
+use App\Entity\Dossier;
 use App\Form\Consultation1Type;
 use App\Repository\ConsultationRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -28,6 +29,7 @@ class InfirmierConsultationController extends AbstractController
         $consultation = new Consultation();
         $consultation->setCreatedAt(new \DatetimeImmutable());
         $consultation->setUser($this->getUser());
+        // $consultation->setDossier($dossier);
         $form = $this->createForm(Consultation1Type::class, $consultation);
         $form->handleRequest($request);
 
@@ -35,8 +37,11 @@ class InfirmierConsultationController extends AbstractController
             $entityManager->persist($consultation);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_infirmier_consultation_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_medecin_dossier_show', [
+            ], Response::HTTP_SEE_OTHER);
         }
+
+        $this->addFlash('succes', 'Ajout d\'une nouvelle consultation');
 
         return $this->render('infirmier_consultation/new.html.twig', [
             'consultation' => $consultation,
@@ -44,7 +49,7 @@ class InfirmierConsultationController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_infirmier_consultation_show', methods: ['GET'])]
+    #[Route('/', name: 'app_infirmier_consultation_show', methods: ['GET'])]
     public function show(Consultation $consultation): Response
     {
         return $this->render('infirmier_consultation/show.html.twig', [
@@ -52,32 +57,32 @@ class InfirmierConsultationController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_infirmier_consultation_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Consultation $consultation, EntityManagerInterface $entityManager): Response
-    {
-        $form = $this->createForm(Consultation1Type::class, $consultation);
-        $form->handleRequest($request);
+    // #[Route('/edit', name: 'app_infirmier_consultation_edit', methods: ['GET', 'POST'])]
+    // public function edit(Request $request, Consultation $consultation, EntityManagerInterface $entityManager): Response
+    // {
+    //     $form = $this->createForm(Consultation1Type::class, $consultation);
+    //     $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
+    //     if ($form->isSubmitted() && $form->isValid()) {
+    //         $entityManager->flush();
 
-            return $this->redirectToRoute('app_infirmier_consultation_index', [], Response::HTTP_SEE_OTHER);
-        }
+    //         return $this->redirectToRoute('app_infirmier_consultation_index', [], Response::HTTP_SEE_OTHER);
+    //     }
 
-        return $this->render('infirmier_consultation/edit.html.twig', [
-            'consultation' => $consultation,
-            'form' => $form,
-        ]);
-    }
+    //     return $this->render('infirmier_consultation/edit.html.twig', [
+    //         'consultation' => $consultation,
+    //         'form' => $form,
+    //     ]);
+    // }
 
-    #[Route('/{id}', name: 'app_infirmier_consultation_delete', methods: ['POST'])]
-    public function delete(Request $request, Consultation $consultation, EntityManagerInterface $entityManager): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$consultation->getId(), $request->request->get('_token'))) {
-            $entityManager->remove($consultation);
-            $entityManager->flush();
-        }
+    // #[Route('/', name: 'app_infirmier_consultation_delete', methods: ['POST'])]
+    // public function delete(Request $request, Consultation $consultation, EntityManagerInterface $entityManager): Response
+    // {
+    //     if ($this->isCsrfTokenValid('delete'.$consultation->getId(), $request->request->get('_token'))) {
+    //         $entityManager->remove($consultation);
+    //         $entityManager->flush();
+    //     }
 
-        return $this->redirectToRoute('app_infirmier_consultation_index', [], Response::HTTP_SEE_OTHER);
-    }
+    //     return $this->redirectToRoute('app_infirmier_consultation_index', [], Response::HTTP_SEE_OTHER);
+    // }
 }

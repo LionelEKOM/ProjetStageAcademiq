@@ -3,7 +3,12 @@
 {% block title %}Antecedent index{% endblock %}
 
 {% block body %}
-    <h1>Antecedent index</h1>
+<div class="wrapper">
+    {% include '_partials/asidebar.html.twig' %}
+    <div class="main">
+        {% include '_partials/_navbar.html.twig' %}
+        <div class="container">
+            <h1>Historique Antecedents</h1>
 
     <table class="table">
         <thead>
@@ -36,4 +41,7 @@
     </table>
 
     <a href="{{ path('app_admin_antecedent_new') }}">Create new</a>
+        </div>
+    </div>
+</div>
 {% endblock %}

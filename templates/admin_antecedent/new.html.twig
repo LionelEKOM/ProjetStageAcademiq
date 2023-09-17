@@ -3,9 +3,22 @@
 {% block title %}New Antecedent{% endblock %}
 
 {% block body %}
-    <h1>Create new Antecedent</h1>
+<div class="wrapper">
+    {% include '_partials/asidebar.html.twig' %}
+    <div class="main">
+        {% include '_partials/_navbar.html.twig' %}
+        <div class="container">
+    <div class="row mx-auto w-50">
+        <div class="col">
+            <h1 class="mt-2">Création Antecdent</h1>
 
-    {{ include('admin_antecedent/_form.html.twig') }}
+            {{ include('admin_antecedent/_form.html.twig') }}
 
-    <a href="{{ path('app_admin_antecedent_index') }}">back to list</a>
+            <a class="btn btn-warning" href="{{ path('app_admin_antecedent_index') }}">Retour</a>
+        </div>
+    </div>
+</div>
+    </div>
+</div>
+
 {% endblock %}

@@ -36,6 +36,7 @@ class AdminDossierController extends AbstractController
             $entityManager->persist($dossier);
             $entityManager->flush();
 
+            $this->addFlash('success', 'Dossier crée avec succes.');
             return $this->redirectToRoute('app_admin_dossier_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -62,6 +63,7 @@ class AdminDossierController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
+            $this->addFlash('info', 'Dossier édité avec succes.');
             return $this->redirectToRoute('app_admin_dossier_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -79,6 +81,7 @@ class AdminDossierController extends AbstractController
             $entityManager->flush();
         }
 
+        $this->addFlash('danger', 'Dossier supprimé avec succes.');
         return $this->redirectToRoute('app_admin_dossier_index', [], Response::HTTP_SEE_OTHER);
     }
 }

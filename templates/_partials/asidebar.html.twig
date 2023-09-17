@@ -16,17 +16,17 @@
 				{# Dropdown #}
 				<div class="row">
 					<li class="sidebar-item my-2">
-						<a class="nav-link" href="#">
+						<a class="nav-link" href="{{ path('app_admin_antecedent_index')}}">
 							<i class="fa-solid fa-calendar-days" style="color: #ffffff;"></i>
 							Antecedents</a>
 					</li>
 					<li class="sidebar-item my-2">
-						<a class="nav-link" href="#">
+						<a class="nav-link" href="{{ path('app_admin_consultation_index')}}">
 							<i class="fa-solid fa-calendar-days" style="color: #ffffff;"></i>
 							Consultations</a>
 					</li>
 					<li class="sidebar-item my-2">
-						<a class="nav-link" href="#">
+						<a class="nav-link" href="{{ path('app_admin_dossier_index')}}">
 							<i class="fa-solid fa-chart-gantt" style="color: #ffffff;"></i>
 							Dossiers</a>
 					</li>
@@ -43,12 +43,6 @@
 									Ajouter</a>
 							</li>
 							<li>
-								<a class="dropdown-item text-dark" href="#">
-									<i class="fa-solid fa-user-pen"></i>
-									Editer
-								</a>
-							</li>
-							<li>
 								<a class="dropdown-item text-dark" href="{{path('app_admin_user_index')}}">
 									<i class="fa-solid fa-list"></i>
 									Afficher
@@ -59,36 +53,6 @@
 								<a class="dropdown-item text-dark" href="#">Something else here</a>
 							</li>
 						</ul>
-					</li>
-					<li class="nav-item dropdown text-light my-2">
-						<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-							<i class="fa-regular fa-user" style="color: #ffffff;"></i>
-							Gerer Patients
-						</a>
-						<ul class="dropdown-menu">
-							<li>
-								<a class="dropdown-item text-dark" href="{{path('app_admin_user_new')}}">
-									<i class="fa-solid fa-plus"></i>
-									Ajouter</a>
-							</li>
-							<li>
-								<a class="dropdown-item text-dark" href="#">
-									<i class="fa-solid fa-user-pen"></i>
-									Editer
-								</a>
-							</li>
-							<li>
-								<a class="dropdown-item text-dark" href="{{path('app_admin_user_index')}}">
-									<i class="fa-solid fa-list"></i>
-									Afficher
-								</a>
-							</li>
-						</ul>
-					</li>
-					<li class="sidebar-item my-2">
-						<a class="nav-link" href="#">
-							<i class="fa-solid fa-list" style="color: #ffffff;"></i>
-							Patients</a>
 					</li>
 				</div>
 				<div class="col"></div>

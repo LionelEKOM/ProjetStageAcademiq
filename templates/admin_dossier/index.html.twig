@@ -3,43 +3,68 @@
 {% block title %}Dossier index{% endblock %}
 
 {% block body %}
-    <h1>Dossier index</h1>
+    <div class="wrapper">
+        {% include '_partials/asidebar.html.twig' %}
+        <div class="main">
+            {% include '_partials/_navbar.html.twig' %}
+            <div class="container">
+                {% for type, messages in app.flashes() %}
+						<div class="">
+							{% for message in messages %}
+								<div class=" text-center alert alert-{{ type }}" role="alert">
+									{{ message }}
+								</div>
+							{% endfor %}
+						</div>
+					{% endfor %}
 
-    <table class="table">
+                    <div class="row mt-3">
+                        <div class="col-9">
+                            <h1>Historique Dossiers</h1>
+                        </div>
+                        <div class="col-3 text-end">
+                            <a class="btn btn-success mt-2" href="{{ path('app_infirmier_consultation_new') }}">
+                            <i class="fa-solid fa-user-plus"></i>
+                            Nouv. Dossier</a>
+                        </div>
+                    </div>
+                <hr class="border border-primary border-2 opacity-50">   
+
+    <table class="table table-striped">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Clinique</th>
-                <th>Firstname</th>
-                <th>Lastname</th>
+                {# <th>Id</th> #}
+                {# <th>Clinique</th> #}
+                <th>Prénom</th>
+                <th>Nom</th>
                 <th>Age</th>
                 <th>Sexe</th>
-                <th>Email</th>
-                <th>Adresse</th>
-                <th>Phone</th>
-                <th>Profession</th>
+                <th>E-mail</th>
+                {# <th>Adresse</th> #}
+                {# <th>Téléphone</th> #}
+                {# <th>Profession</th> #}
                 <th>Taille</th>
                 <th>Poids</th>
-                <th>CreatedAt</th>
-                <th>actions</th>
+                <th>Date création</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for dossier in dossiers %}
             <tr>
-                <td>{{ dossier.id }}</td>
-                <td>{{ dossier.clinique }}</td>
+                {# <td>{{ dossier.id }}</td> #}
+                {# <td>{{ dossier.clinique }}</td> #}
                 <td>{{ dossier.firstname }}</td>
                 <td>{{ dossier.lastname }}</td>
-                <td>{{ dossier.age }}</td>
+                <td>{{ dossier.age }} ans</td>
                 <td>{{ dossier.sexe }}</td>
                 <td>{{ dossier.email }}</td>
-                <td>{{ dossier.adresse }}</td>
-                <td>{{ dossier.phone }}</td>
-                <td>{{ dossier.profession }}</td>
-                <td>{{ dossier.taille }}</td>
-                <td>{{ dossier.poids }}</td>
-                <td>{{ dossier.createdAt ? dossier.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                {# <td>{{ dossier.adresse }}</td> #}
+                {# <td>{{ dossier.phone }}</td> #}
+                {# <td>{{ dossier.profession }}</td> #}
+                <td>{{ dossier.taille }} cm</td>
+                <td>{{ dossier.poids }} kg</td>
+                <td>{{ dossier.createdAt ? dossier.createdAt|date('Y-m-d')}}</td>
                 <td>
                     <a href="{{ path('app_admin_dossier_show', {'id': dossier.id}) }}">show</a>
                     <a href="{{ path('app_admin_dossier_edit', {'id': dossier.id}) }}">edit</a>
@@ -52,6 +77,7 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('app_admin_dossier_new') }}">Create new</a>
+            </div>
+        </div>
+    </div>
 {% endblock %}

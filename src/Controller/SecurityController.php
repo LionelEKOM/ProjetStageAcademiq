@@ -16,31 +16,31 @@ class SecurityController extends AbstractController
         //     return $this->redirectToRoute('app_home');
         // }
 
-            // Récupérer les rôles de l'utilisateur
+        if ($this->getUser()) {
+
+            $this->addFlash('danger', 'Désolé mais vous etes deja connecté !!' );
+             // Récupérer les rôles de l'utilisateur
         $roles = $this->getUser()->getRoles();
 
         // Vérifier le rôle et rediriger en fonction
         if (in_array('ROLE_MEDECIN', $roles, true)) {
-            return $this->redirectToRoute('app_medecin');
+            return $this->redirectToRoute('app_medecin_dossier_index');
         } elseif (in_array('ROLE_INFIRMIER', $roles, true)) {
-            return $this->redirectToRoute('app_infirmier');
+            return $this->redirectToRoute('app_infirmier_consultation_index');
         } elseif (in_array('ROLE_ADMIN', $roles, true)) {
             return $this->redirectToRoute('app_admin_user_index');
         } else {
             // Redirection par défaut si le rôle n'est pas reconnu
             return $this->redirectToRoute('app_home');
         }
+            }
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
-        // Dans votre contrôleur après l'authentification réussie
-        // Dans votre contrôleur après l'authentification réussie
-         // Obtenez l'utilisateur actuel
 
         $this->addFlash('success', 'Bienvenue ! Vous êtes maintenant connecté.');
     
-
         return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
 
