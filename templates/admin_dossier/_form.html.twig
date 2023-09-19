@@ -5,17 +5,52 @@
 
 {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
 
-{{ form_row(form.firstname, {'attr': {'class': 'form-control'}}) }}
-{{ form_row(form.lastname, {'attr': {'class': 'form-control'}}) }}
-{{ form_row(form.age, {'attr': {'class': 'form-control'}}) }}
-{{ form_row(form.sexe, {'attr': {'class': 'form-select'}}) }}
-{{ form_row(form.email, {'attr': {'class': 'form-control'}}) }}
-{{ form_row(form.adresse, {'attr': {'class': 'form-control'}}) }}
-{{ form_row(form.phone, {'attr': {'class': 'form-control'}}) }}
-{{ form_row(form.profession, {'attr': {'class': 'form-control'}}) }}
-{{ form_row(form.taille, {'attr': {'class': 'form-control'}}) }}
-{{ form_row(form.poids, {'attr': {'class': 'form-control'}}) }}
+<div class="row mx-auto" style="width: 75%;">
+	<div class="col-4">
+		{{ form_row(form.firstname, {'attr': {'class': 'form-control'}}) }}
+	</div>
+	<div class="col-4">
+		{{ form_row(form.lastname, {'attr': {'class': 'form-control'}}) }}
+	</div>
+	<div class="col-4">
+		{{ form_row(form.email, {'attr': {'class': 'form-control'}}) }}
+	</div>
+	<div class="col-4">
+		{{ form_row(form.age, {'attr': {'class': 'form-control'}}) }}
+	</div>
+	<div class="col-4">
+		{{ form_row(form.taille, {'attr': {'class': 'form-control'}}) }}
+	</div>
+	<div class="col-4">
+		{{ form_row(form.poids, {'attr': {'class': 'form-control'}}) }}
+	</div>
+	<div class="col-6">
+		{{ form_row(form.adresse, {'attr': {'class': 'form-control'}}) }}
+	</div>
+	<div class="col-6">
+		{{ form_row(form.profession, {'attr': {'class': 'form-control'}}) }}
+	</div>
+	<div class="col-8">
+		{{ form_row(form.phone, {'attr': {'class': 'form-control'}}) }}
+	</div>
+	<div class="col-4">
+		{{ form_row(form.sexe, {'attr': {'class': 'form-select'}}) }}
+	</div>
 
-<button type="submit" class="btn btn-lg btn-success mt-2">Crée</button>
+	<div class="col-md-6">
+		<div class="d-grid gap-2">
+			<button type="submit" class="btn btn-lg btn-success mt-2">
+				<i class="fa-solid fa-check"></i>
+				Valider</button>
+		</div>
+	</div>
+	<div class="col-md-6">
+		<div class="d-grid gap-2">
+			<a class="btn btn-lg btn-warning mt-2" href="{{ path('app_admin_dossier_index') }}">
+                <i class="fa-solid fa-rotate-left"></i>
+                Retour
+            </a>
+	</div>
+</div>
+</div>{{ form_end(form) }}
 
-{{ form_end(form) }}

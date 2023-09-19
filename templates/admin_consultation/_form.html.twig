@@ -1,4 +1,22 @@
 {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+<div class="row mx-auto" style="width:75%;">
     {{ form_widget(form) }}
-    <button class="btn btn-success">{{ button_label|default('Enregistrer') }}</button>
+
+    <div class="col-md-6">
+		<div class="d-grid gap-2">
+            <button class="btn btn-lg btn-success mt-2">
+                <i class="fa-solid fa-check"></i>
+                {{ button_label|default('Enregistrer') }}
+            </button>
+		</div>
+	</div>
+	<div class="col-md-6">
+		<div class="d-grid gap-2">
+            <a class="btn btn-lg btn-warning mt-2" href="{{ path('app_admin_consultation_index') }}">
+                <i class="fa-solid fa-rotate-left"></i>
+                    Retour
+            </a>
+	</div>
+    
+</div>
 {{ form_end(form) }}
