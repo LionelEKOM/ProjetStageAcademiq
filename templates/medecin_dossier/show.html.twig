@@ -159,6 +159,9 @@
 					</div>
 					<div class="col">
 						<h1>Ordonnances</h1>
+							<div>
+								<a href="{{ path('app_ordonnance_new', {'id': dossier.id})}}">Ajouter</a>
+							</div>
 						<table class="table">
 							<thead>
 								<tr>
@@ -176,7 +179,7 @@
 								{% for ordonnance in ordonnances %}
 									<tr>
 										{# <td>{{ ordonnance.id }}</td> #}
-										<td>{{ ordonnance.createdAt ? ordonnance.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+										<td>{{ ordonnance.createdAt ? ordonnance.createdAt|date('Y-m-d')}}</td>
 										<td>{{ ordonnance.title }}</td>
 										<td>{{ ordonnance.medicament }}</td>
 										<td>{{ ordonnance.quantite }}</td>

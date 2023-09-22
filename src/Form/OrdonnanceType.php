@@ -12,14 +12,14 @@ class OrdonnanceType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('createdAt')
-            ->add('title')
+            // ->add('createdAt')
+            // ->add('title')
             ->add('medicament')
             ->add('quantite')
-            ->add('debut')
+            // ->add('debut')
             ->add('fin')
-            ->add('user')
-            ->add('dossier')
+            // ->add('user')
+            // ->add('dossier')
         ;
     }
 
