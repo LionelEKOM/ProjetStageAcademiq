@@ -209,10 +209,42 @@
 				flex-direction: column;
 				justify-content: space-between;
 			}
+
+			#scrollContainer {
+				max-height: 200px; /* Hauteur maximale avant que le défilement ne soit activé */
+				overflow-y: auto; /* Activation du défilement vertical */
+			}
+
+			#itemList {
+				list-style-type: none; /* Supprime les puces de la liste */
+				padding: 0; /* Supprime le rembourrage par défaut */
+			}
 		</style>
 	{% endblock %}
 
-	{% block javascripts %}{% endblock %}
+	{% block javascripts %}
+		<script>
+			$(document).ready(function () {
+var maxItems = 5; // Quota d'éléments dans la div
+var itemList = $('#itemList');
+var totalItems = itemList.children('li').length;
+
+if (totalItems > maxItems) { // Masquer les éléments excédentaires
+itemList.children('li:gt(' + (
+maxItems - 1
+) + ')').hide();
+
+// Ajouter un bouton pour dérouler la liste
+$('#scrollContainer').append('<button id="scrollButton">Voir plus</button>');
+
+// Gérer le clic sur le bouton pour dérouler la liste
+$('#scrollButton').click(function () {
+itemList.children('li:hidden').toggle();
+});
+}
+});
+		</script>
+	{% endblock %}
 
 	{# Partie bouton navbar #}
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>

@@ -8,6 +8,15 @@
 		<div class="main">
 			{% include '_partials/_navbar.html.twig' %}
 			<div class="container">
+				{% for type, messages in app.flashes() %}
+					<div class="">
+						{% for message in messages %}
+							<div class=" text-center alert alert-{{ type }}" role="alert">
+								{{ message }}
+							</div>
+						{% endfor %}
+					</div>
+				{% endfor %}
 				<div class="row mt-3">
 					<div class="col-9">
 						<h1 class="mt-3">
@@ -19,7 +28,7 @@
 					<h1>{{ dossier.clinique }}</h1>
 					<hr class="border border-success border-2 opacity-50">
 				</div>
-				<div class="row my-2">
+				<div class="row">
 					<div class="col-5 me-4 border border-primary-subtle">
 						<h1>
 							{% if dossier.sexe == 'Homme' %}
@@ -73,8 +82,8 @@
 							<div
 								class="col-2 mt-1 text-end">
 								{# <a class="btn btn-success mt-2" href="{{ path('app_admin_dossier_new') }}">
-								                            <i class="fa-solid fa-user-plus"></i>
-								                            Nouv. Dossier</a> #}
+																                            <i class="fa-solid fa-user-plus"></i>
+																                            Nouv. Dossier</a> #}
 								<div class="dropdown">
 									<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false"></button>
 									<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -125,8 +134,23 @@
 				</div>
 				<div class="row">
 					<div class="col">
-						<h1>Historique Antecedents</h1>
-
+						<div class="row">
+							<div class="col-9">
+								<h2 class="mt-4">Historique Antecedents</h2>
+							</div>
+							<div
+								class="col-2 mt-3 px-1 text-end">
+								<div class="dropdown">
+									<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false"></button>
+									<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+										<li>
+											<a class="dropdown-item" href="{{ path('app_ordonnance_new', {'id': dossier.id})}}">Ajouter</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>						
+						<hr class="border border-info border-2 opacity-50">
 						<table class="table table-striped">
 							<thead>
 								<tr>
@@ -144,10 +168,6 @@
 										<td>{{ antecedent.type }}</td>
 										<td>{{ antecedent.description }}</td>
 										<td>{{ antecedent.createdAt ? antecedent.createdAt|date('Y-m-d')}}</td>
-										{# <td>
-											<a href="{{ path('app_admin_antecedent_show', {'id': antecedent.id}) }}">show</a>
-											<a href="{{ path('app_admin_antecedent_edit', {'id': antecedent.id}) }}">edit</a>
-											</td> #}
 									</tr>
 								{% else %}
 									<tr>
@@ -158,52 +178,83 @@
 						</table>
 					</div>
 					<div class="col">
-						<h1>Ordonnances</h1>
-							<div>
-								<a href="{{ path('app_ordonnance_new', {'id': dossier.id})}}">Ajouter</a>
+
+						<div class="row mt-2">
+							<div class="col-9">
+								<h2>Historique Ordonances</h2>
 							</div>
-						<table class="table">
-							<thead>
-								<tr>
-									{# <th>Id</th> #}
-									<th>Date</th>
-									<th>Titre</th>
-									<th>Medicament</th>
-									<th>Quantite</th>
-									<th>Debut</th>
-									<th>Fin</th>
-									{# <th>actions</th> #}
-								</tr>
-							</thead>
-							<tbody>
-								{% for ordonnance in ordonnances %}
+							<div class="col-2 mt-1 px-1 text-end">
+								<div class="dropdown">
+									<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false"></button>
+									<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+										<li>
+											<a class="dropdown-item" href="{{ path('app_ordonnance_new', {'id': dossier.id})}}">Ajouter</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<hr class="border border-success border-2 opacity-50">
+						<div id="scrollContainer">
+							<table class="table table-striped">
+								<thead>
 									<tr>
-										{# <td>{{ ordonnance.id }}</td> #}
-										<td>{{ ordonnance.createdAt ? ordonnance.createdAt|date('Y-m-d')}}</td>
-										<td>{{ ordonnance.title }}</td>
-										<td>{{ ordonnance.medicament }}</td>
-										<td>{{ ordonnance.quantite }}</td>
-										<td>{{ ordonnance.debut ? ordonnance.debut|date('Y-m-d') : '' }}</td>
-										<td>{{ ordonnance.fin ? ordonnance.fin|date('Y-m-d') : '' }}</td>
-										{# <td>
-											<a href="{{ path('app_ordonnance_show', {'id': ordonnance.id}) }}">show</a>
-											<a href="{{ path('app_ordonnance_edit', {'id': ordonnance.id}) }}">edit</a>
-										</td> #}
+										{# <th>Id</th> #}
+										<th>Date</th>
+										<th>Titre</th>
+										<th>Medicament</th>
+										<th>Quantite</th>
+										<th>Debut</th>
+										<th>Fin</th>
+										{# <th>actions</th> #}
 									</tr>
-								{% else %}
-									<tr>
-										<td colspan="8">no records found</td>
-									</tr>
-								{% endfor %}
-							</tbody>
-						</table>
+								</thead>
+								<tbody>
+									{% for ordonnance in ordonnances %}
+										<tr>
+											{# <td>{{ ordonnance.id }}</td> #}
+											<td>{{ ordonnance.createdAt ? ordonnance.createdAt|date('Y-m-d')}}</td>
+											<td>{{ ordonnance.title }}</td>
+											<td>{{ ordonnance.medicament }}</td>
+											<td>{{ ordonnance.quantite }}</td>
+											<td>{{ ordonnance.debut ? ordonnance.debut|date('Y-m-d') : '' }}</td>
+											<td>{{ ordonnance.fin ? ordonnance.fin|date('Y-m-d') : '' }}</td>
+											{# <td>
+																																	<a href="{{ path('app_ordonnance_show', {'id': ordonnance.id}) }}">show</a>
+																																	<a href="{{ path('app_ordonnance_edit', {'id': ordonnance.id}) }}">edit</a>
+																																</td> #}
+										</tr>
+									{% else %}
+										<tr>
+											<td colspan="8">no records found</td>
+										</tr>
+									{% endfor %}
+								</tbody>
+							</table>
+						</div>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col">
-						<h1>Examens</h1>
-
-						<table class="table">
+						<div class="row">
+							<div class="col-9">
+								<h2 class="mt-4">Examens</h2>
+							</div>
+							<div class="col-2 mt-3 px-1 text-end">
+								<div class="dropdown">
+									<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false"></button>
+									<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+										<li>
+											<a class="dropdown-item" href="{{ path('app_ordonnance_new', {'id': dossier.id})}}">Ajouter</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<hr class="border border-danger border-2 opacity-50">
+						{# <h1>Examens</h1> #}
+						<div id="scrollContainer">
+							<table class="table table-striped">
 							<thead>
 								<tr>
 									{# <th>Id</th> #}
@@ -221,9 +272,9 @@
 										<td>{{ examan.type }}</td>
 										<td>{{ examan.resultat }}</td>
 										{# <td>
-											<a href="{{ path('app_examen_show', {'id': examan.id}) }}">show</a>
-											<a href="{{ path('app_examen_edit', {'id': examan.id}) }}">edit</a>
-										</td> #}
+																					<a href="{{ path('app_examen_show', {'id': examan.id}) }}">show</a>
+																					<a href="{{ path('app_examen_edit', {'id': examan.id}) }}">edit</a>
+																				</td> #}
 									</tr>
 								{% else %}
 									<tr>
@@ -232,11 +283,27 @@
 								{% endfor %}
 							</tbody>
 						</table>
+						</div>
 					</div>
 					<div class="col">
-						<h1>Rendez-vous Médicaux</h1>
-
-						<table class="table">
+						<div class="row mt-2">
+							<div class="col-9">
+								<h2 class="mt-4">Rendez-vous Médicaux</h2>
+							</div>
+							<div
+								class="col-2 mt-3 px-1 text-end">
+								<div class="dropdown">
+									<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false"></button>
+									<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+										<li>
+											<a class="dropdown-item" href="{{ path('app_ordonnance_new', {'id': dossier.id})}}">Ajouter</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>						
+						<hr class="border border-warning border-2 opacity-50">
+						<table class="table table-striped">
 							<thead>
 								<tr>
 									{# <th>Id</th> #}
@@ -265,7 +332,10 @@
 						</table>
 					</div>
 				</div>
-				<a class="btn btn-warning" href="{{ path('app_medecin_dossier_index') }}">Retour</a>
+
+				<div class="d-grid gap-2 col-6 mx-auto">
+					<a class="btn btn-warning" style="font-size: 25px" href="{{ path('app_medecin_dossier_index') }}">Retour</a>
+				</div>
 			</div>
 		</div>
 	</div>

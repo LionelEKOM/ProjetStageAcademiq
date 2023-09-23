@@ -1,4 +1,20 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+<div class="container">
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+    <div class="row w-50 mx-auto">
+        <b>{{ form_label(form.medicament) }}</b>
+        {{ form_widget(form.medicament, { 'attr': { 'class': 'form-control', 'placeholder': 'Nom du médicament', 'autofocus': 'autofocus' } }) }}
+
+        <b>{{ form_label(form.quantite) }}</b>
+        {{ form_widget(form.quantite, { 'attr': { 'class': 'form-control', 'placeholder': 'Quantité' } }) }}
+        
+        <b>{{ form_label(form.fin) }}</b>
+        {{ form_widget(form.fin) }}
+
+        <div class="d-grid gap-2 col-6 mt-3 mx-auto">
+            <button class="btn btn-success">{{ button_label|default('Enregistrer') }}</button>
+        </div>
+
+    </div>
 {{ form_end(form) }}
+
+</div>
