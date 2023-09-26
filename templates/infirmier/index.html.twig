@@ -1,20 +1,55 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello InfirmierController!{% endblock %}
+{% block title %}index Infirmier!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/Lionel EKOM/Documents/ProjetStage/src/Controller/InfirmierController.php'|file_link(0) }}">src/Controller/InfirmierController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/Lionel EKOM/Documents/ProjetStage/templates/infirmier/index.html.twig'|file_link(0) }}">templates/infirmier/index.html.twig</a></code></li>
-    </ul>
-</div>
+    <div class="wrapper">
+        {% include '_partials/asidebarInf.html.twig' %}
+        <div class="main">
+            {% for type, messages in app.flashes() %}
+						<div class="">
+							{% for message in messages %}
+								<div class=" text-center alert alert-{{ type }}" role="alert">
+									{{ message }}
+								</div>
+							{% endfor %}
+						</div>
+				{% endfor %}
+            {% include '_partials/_navbar.html.twig' %}
+            <div class="container">
+                <div class="row mt-3" style="margin: 30px">
+                    <div class=" col card w-25 mb-2 me-2">
+                        <div class="card-body">
+                            <h5 class="card-title">Nouveau patient</h5>
+                            <p class="card-text">Créer un Dossier</p>
+                            <a href="{{ path('app_infirmier_dossier_new') }}" class="btn btn-primary">Valider</a>
+                        </div>
+                    </div>
+                    <div class=" col card w-25 mb-2">
+                        <div class="card-body">
+                            <h5 class="card-title">Dossiers</h5>
+                            <p class="card-text">Consulter des dossiers</p>
+                            <a href="{{ path('app_infirmier_dossier_index')}}" class="btn btn-primary">Afficher</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-1" style="margin: 30px">
+                    <div class=" col card w-25 mb-2 me-2">
+                        <div class="card-body">
+                            <h5 class="card-title">Rendez-vous</h5>
+                            <p class="card-text">Consulter les Rendez-vous du jour</p>
+                            <a href="{{ path('app_infirmier_rdv_index')}}" class="btn btn-primary">Afficher</a>
+                        </div>
+                    </div>
+                    <div class=" col card w-25 mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Liste des patients</h5>
+                            <p class="card-text">Consulter la liste des patients</p>
+                            <a href="#" class="btn btn-primary">Liste</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

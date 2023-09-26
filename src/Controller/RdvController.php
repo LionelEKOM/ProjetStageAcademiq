@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Rdv;
 use App\Form\RdvType;
+use App\Repository\DossierRepository;
 use App\Repository\RdvRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,38 +16,41 @@ use Symfony\Component\Routing\Annotation\Route;
 class RdvController extends AbstractController
 {
     #[Route('/', name: 'app_rdv_index', methods: ['GET'])]
-    public function index(RdvRepository $rdvRepository): Response
+    public function index(RdvRepository $rdvRepository, DossierRepository $dossierRepository): Response
     {
         return $this->render('rdv/index.html.twig', [
             'rdvs' => $rdvRepository->findAll(),
+            'dossiers' => $dossierRepository->findAll() // Récupération de tous les dossiers
         ]);
     }
 
-    #[Route('/new', name: 'app_rdv_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        $rdv = new Rdv();
-        $form = $this->createForm(RdvType::class, $rdv);
-        $form->handleRequest($request);
+    // #[Route('/new', name: 'app_rdv_new', methods: ['GET', 'POST'])]
+    // public function new(Request $request, EntityManagerInterface $entityManager): Response
+    // {
+    //     $rdv = new Rdv();
+    //     $form = $this->createForm(RdvType::class, $rdv);
+    //     $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($rdv);
-            $entityManager->flush();
+    //     if ($form->isSubmitted() && $form->isValid()) {
+    //         $entityManager->persist($rdv);
+    //         $entityManager->flush();
 
-            return $this->redirectToRoute('app_rdv_index', [], Response::HTTP_SEE_OTHER);
-        }
+    //         return $this->redirectToRoute('app_rdv_index', [], Response::HTTP_SEE_OTHER);
+    //     }
 
-        return $this->render('rdv/new.html.twig', [
-            'rdv' => $rdv,
-            'form' => $form,
-        ]);
-    }
+    //     return $this->render('rdv/new.html.twig', [
+    //         'rdv' => $rdv,
+    //         'form' => $form,
+    //     ]);
+    // }
 
     #[Route('/{id}', name: 'app_rdv_show', methods: ['GET'])]
     public function show(Rdv $rdv): Response
     {
+        $dossier = $rdv->getDossier();
         return $this->render('rdv/show.html.twig', [
             'rdv' => $rdv,
+            'dossier' => $dossier
         ]);
     }
 

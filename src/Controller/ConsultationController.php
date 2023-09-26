@@ -4,21 +4,23 @@ namespace App\Controller;
 
 use App\Entity\Consultation;
 use App\Form\Consultation2Type;
-use App\Repository\ConsultationRepository;
+use App\Repository\DossierRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\ConsultationRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/consultation')]
 class ConsultationController extends AbstractController
 {
     #[Route('/', name: 'app_consultation_index', methods: ['GET'])]
-    public function index(ConsultationRepository $consultationRepository): Response
+    public function index(ConsultationRepository $consultationRepository, DossierRepository $dossierRepository): Response
     {
         return $this->render('consultation/index.html.twig', [
             'consultations' => $consultationRepository->findAll(),
+            'dossiers' => $dossierRepository->findAll() // Récupération de tous les dossiers
         ]);
     }
 

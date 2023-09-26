@@ -3,37 +3,59 @@
 {% block title %}Consultation index{% endblock %}
 
 {% block body %}
-    <h1>Consultation index</h1>
+    <div class="wrapper">
+        {% include '_partials/asidebarInf.html.twig' %}
+        <div class="main">
+            {% include '_partials/_navbar.html.twig' %}
+            <div class="container">
+            
+                {% for type, messages in app.flashes() %}
+						<div class="">
+							{% for message in messages %}
+								<div class=" text-center alert alert-{{ type }}" role="alert">
+									{{ message }}
+								</div>
+							{% endfor %}
+						</div>
+				{% endfor %}
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>CreatedAt</th>
-                <th>Motif</th>
-                <th>Traitant</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for consultation in consultations %}
-            <tr>
-                <td>{{ consultation.id }}</td>
-                <td>{{ consultation.createdAt ? consultation.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ consultation.motif }}</td>
-                <td>{{ consultation.traitant }}</td>
-                <td>
-                    <a href="{{ path('app_infirmier_consultation_show', {'id': consultation.id}) }}">show</a>
-                    <a href="{{ path('app_infirmier_consultation_edit', {'id': consultation.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+                <h1 class="text-center">Consultation index</h1>
 
-    <a href="{{ path('app_infirmier_consultation_new') }}">Create new</a>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            {# <th>Id</th> #}
+                            <b><th>Nom du Patient</th></b>
+                            <b><th>Date</th></b>
+                            <b><th>Motif</th></b>
+                            <b><th>Médecin Traitant</th></b>
+                            {# <b><th>actions</th></b> #}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for consultation in consultations %}
+                            <tr>
+                                {# <td>{{ consultation.id }}</td> #}
+                                <td>{{ consultation.dossier.fullname }}</td>
+                                <td>{{ consultation.createdAt ? consultation.createdAt|date('d-m-Y')}}</td>
+                                <td>{{ consultation.motif }}</td>
+                                <td>{{ consultation.traitant }}</td>
+                                {# <td>
+                                    <a href="{{ path('app_infirmier_consultation_show', {'id': consultation.id}) }}">show</a>
+                                    <a href="{{ path('app_infirmier_consultation_edit', {'id': consultation.id}) }}">edit</a>
+                                </td> #}
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="5">no records found</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                <a href="{{ path('app_infirmier_consultation_new') }}">Create new</a>
+
+            </div>
+        </div>
+    </div>
 {% endblock %}

@@ -240,6 +240,11 @@ class Dossier
         return $this;
     }
 
+    public function Fullname(): ?string
+    {
+        return $this->getFirstname() . ' ' . $this->getLastname();
+    }
+
     public function __toString()
     {
         return $this->firstname . ' ' . $this->lastname; // Remplacez "name" par le champ approprié de votre entité Dossier

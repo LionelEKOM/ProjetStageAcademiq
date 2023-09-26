@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Rdv{% endblock %}
+
+{% block body %}
+    <h1>Rdv</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ rdv.id }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ rdv.date ? rdv.date|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Motif</th>
+                <td>{{ rdv.motif }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_infirmier_rdv_index') }}">back to list</a>
+
+    <a href="{{ path('app_infirmier_rdv_edit', {'id': rdv.id}) }}">edit</a>
+
+    {{ include('infirmier_rdv/_delete_form.html.twig') }}
+{% endblock %}

@@ -8,13 +8,13 @@
         <div class="main">
             {% include '_partials/_navbar.html.twig' %}
             <div class="container">
-                <h1>Consultation du jour</h1>
+                <h1 class="mt-2">Consultation du jour</h1>
+                <hr class="border border-info border-2 opacity-50">
 
                 <table class="table">
                     <thead>
                         <tr>
-                            {# <th>Id</th> #}
-                            {# <th>Date</th> #}
+                            <th>Nom du Patient</th>
                             <th>Motif
                             </th>
                             {# <th>Medecin traitant</th> #}
@@ -25,8 +25,7 @@
                         <tbody>
                             {% for consultation in consultations %}
                                 <tr>
-                                {# <td>{{ consultation.id }}</td> #}
-                                {# <td>{{ consultation.createdAt ? consultation.createdAt|date('Y-m-d H:i:s') : '' }}</td> #}
+                                <td>{{ consultation.dossier.fullname }} </td>
                                 <td>{{ consultation.motif }}</td>
                                 {# <td>{{ consultation.traitant }}</td> #}
                                     <td><a href="{{ path('app_consultation_show', {'id': consultation.id}) }}"> show</a>
