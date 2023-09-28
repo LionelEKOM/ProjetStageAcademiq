@@ -22,7 +22,7 @@
                         <div class="card-body">
                             <h5 class="card-title">Nouveau patient</h5>
                             <p class="card-text">Créer un Dossier</p>
-                            <a href="{{ path('app_infirmier_dossier_new') }}" class="btn btn-primary">Valider</a>
+                            <a href="{{ path('app_infirmier_dossier_new') }}" class="btn btn-primary">Créer</a>
                         </div>
                     </div>
                     <div class=" col card w-25 mb-2">
@@ -43,9 +43,9 @@
                     </div>
                     <div class=" col card w-25 mb-3">
                         <div class="card-body">
-                            <h5 class="card-title">Liste des patients</h5>
+                            <h5 class="card-title">Consultation(s)</h5>
                             <p class="card-text">Consulter la liste des patients</p>
-                            <a href="#" class="btn btn-primary">Liste</a>
+                            <a href="{{ path('app_infirmier_consultation_index')}}" class="btn btn-primary">Afficher</a>
                         </div>
                     </div>
                 </div>

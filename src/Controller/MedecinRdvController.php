@@ -2,15 +2,16 @@
 
 namespace App\Controller;
 
+use DateTime;
 use App\Entity\Rdv;
 use App\Form\Rdv2Type;
+use App\Entity\Dossier;
 use App\Repository\RdvRepository;
-use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/medecin/rdv')]
 class MedecinRdvController extends AbstractController
@@ -24,10 +25,12 @@ class MedecinRdvController extends AbstractController
     }
 
     #[Route('/new', name: 'app_medecin_rdv_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, Dossier $dossier): Response
     {
         $rdv = new Rdv();
         $rdv->setDate(new DateTime());
+        $rdv->setUser($this->getUser());
+        $rdv->setDossier($dossier);
         $form = $this->createForm(Rdv2Type::class, $rdv);
         $form->handleRequest($request);
 
@@ -36,7 +39,9 @@ class MedecinRdvController extends AbstractController
             $entityManager->flush();
 
             $this->addFlash('success', 'Rendez ajouté avec succes !!');
-            return $this->redirectToRoute('app_medecin_rdv_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_medecin_dossier_show', [
+                'id' => $dossier->getId()
+            ], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('medecin_rdv/new.html.twig', [

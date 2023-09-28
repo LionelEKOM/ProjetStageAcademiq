@@ -21,7 +21,7 @@ class OrdonnanceController extends AbstractController
     public function index(OrdonnanceRepository $ordonnanceRepository): Response
     {
         return $this->render('ordonnance/index.html.twig', [
-            'ordonnances' => $ordonnanceRepository->findAll(),
+            'ordonnances' => $ordonnanceRepository->findBy([], ['CreatedAt' => 'DESC']),
         ]);
     }
 

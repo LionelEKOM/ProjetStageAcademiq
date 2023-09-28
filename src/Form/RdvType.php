@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class RdvType extends AbstractType
 {
@@ -33,8 +34,8 @@ class RdvType extends AbstractType
             ],
         ])
         // ... Ajoutez d'autres champs au besoin
-        ->add('user')
-        ->add('dossier')
+        // ->add('user')
+        // ->add('dossier')
     ;    
     }
 

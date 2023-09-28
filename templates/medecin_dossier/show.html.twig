@@ -296,7 +296,7 @@
 									<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false"></button>
 									<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 										<li>
-											<a class="dropdown-item" href="{{ path('app_ordonnance_new', {'id': dossier.id})}}">Ajouter</a>
+											<a class="dropdown-item" href="{{ path('app_rdv_new', {'id': dossier.id})}}">Ajouter</a>
 										</li>
 									</ul>
 								</div>
@@ -309,18 +309,18 @@
 									{# <th>Id</th> #}
 									<th>Date</th>
 									<th>Motif</th>
-									<th>actions</th>
+									{# <th>actions</th> #}
 								</tr>
 							</thead>
 							<tbody>
 								{% for rdv in rdvs %}
 									<tr>
-										<td>{{ rdv.id }}</td>
+										{# <td>{{ rdv.id }}</td> #}
 										<td>{{ rdv.date ? rdv.date|date('Y-m-d') : '' }}</td>
 										<td>{{ rdv.motif }}</td>
 										<td>
-											<a href="{{ path('app_rdv_show', {'id': rdv.id}) }}">show</a>
-											<a href="{{ path('app_rdv_edit', {'id': rdv.id}) }}">edit</a>
+											{# <a href="{{ path('app_rdv_show', {'id': rdv.id}) }}">show</a> #}
+											{# <a href="{{ path('app_rdv_edit', {'id': rdv.id}) }}">edit</a> #}
 										</td>
 									</tr>
 								{% else %}
@@ -334,7 +334,8 @@
 				</div>
 
 				<div class="d-grid gap-2 col-6 mx-auto">
-					<a class="btn btn-warning" style="font-size: 25px" href="{{ path('app_medecin_dossier_index') }}">Retour</a>
+					{# <a  href="{{ path('app_medecin_dossier_index') }}"></a> #}
+					<a class="btn btn-warning" style="font-size: 25px" href="javascript:history.back()">Retour</a>
 				</div>
 			</div>
 		</div>

@@ -34,6 +34,8 @@ class Rdv2Type extends AbstractType
             ],
         ])
         // ... Ajoutez d'autres champs au besoin
+        // ->add('user')
+        ->add('dossier')
     ;    
     }
 
