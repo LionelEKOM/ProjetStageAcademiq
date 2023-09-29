@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\Examen;
+use App\Entity\Antecedent;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -10,37 +10,32 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
-class ExamenType extends AbstractType
+class Antecedent1Type extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            // ->add('createdAt')
             ->add('type', ChoiceType::class, [
-                'attr' => ['autofocus' => 'autofocus'],
-                'label' => 'Type d\'Examen',
+                'attr' => ['class' => 'form-select', 'autofocus' => 'autofocus'],
+                'label' => 'Type d\'antecedent',
                 'choices' => [
-                    'Examens de laboratoire' => 'Examens de laboratoire',
-                    'Imagerie médicale' => 'Imagerie médicale',
-                    'Examens cardiaques' => 'Examens cardiaques',
-                    'Examens respiratoires' => 'Examens respiratoires',
-                    'Examens neurologiques' => 'Examens neurologiques',
-                    'Examens gynécologiques' => 'Examens respiratoires',
-                    'Examens dermatologiques' => 'Examens dermatologiques'
+                    'Antecedents Familiaux' => 'Antecedents Familiaux',
+                    'Antecedents Chirugicaux' => 'Antecedents Chirugicaux',
+                    'Antecedents Médicaux' => 'Antecedents Médicaux',
+                    'Allergies' => 'Allergies'
                 ],
                 'constraints' => [
                     new NotBlank(['message' => 'Veuillez sélectionner un titre.']),
                 ],
             ])
-
-            ->add('resultat', TextareaType::class, [
-                // 'attr' => ['class' => 'form-control'],
+            ->add('description', TextareaType::class, [
+                'attr' => ['class' => 'form-control'],
                 'label' => 'Description',
                 'constraints' => [
                     new NotBlank(['message' => 'La description ne doit pas être vide.'])
                 ]
             ])
-            // ->add('resultat')
+            // ->add('createdAt')
             // ->add('user')
             // ->add('dossier')
         ;
@@ -49,7 +44,7 @@ class ExamenType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Examen::class,
+            'data_class' => Antecedent::class,
         ]);
     }
 }

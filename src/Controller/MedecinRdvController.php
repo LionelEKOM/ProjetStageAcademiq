@@ -25,12 +25,11 @@ class MedecinRdvController extends AbstractController
     }
 
     #[Route('/new', name: 'app_medecin_rdv_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager, Dossier $dossier): Response
+    public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $rdv = new Rdv();
         $rdv->setDate(new DateTime());
         $rdv->setUser($this->getUser());
-        $rdv->setDossier($dossier);
         $form = $this->createForm(Rdv2Type::class, $rdv);
         $form->handleRequest($request);
 
@@ -38,9 +37,9 @@ class MedecinRdvController extends AbstractController
             $entityManager->persist($rdv);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Rendez ajouté avec succes !!');
-            return $this->redirectToRoute('app_medecin_dossier_show', [
-                'id' => $dossier->getId()
+            $this->addFlash('success', 'Rendez-vous ajouté avec succes !!');
+            return $this->redirectToRoute('app_medecin_rdv_index', [
+
             ], Response::HTTP_SEE_OTHER);
         }
 
@@ -50,40 +49,40 @@ class MedecinRdvController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_medecin_rdv_show', methods: ['GET'])]
-    public function show(Rdv $rdv): Response
-    {
-        return $this->render('medecin_rdv/show.html.twig', [
-            'rdv' => $rdv,
-        ]);
-    }
+    // #[Route('/{rdv}', name: 'app_medecin_rdv_show', methods: ['GET'])]
+    // public function show(Rdv $rdv): Response
+    // {
+    //     return $this->render('medecin_rdv/show.html.twig', [
+    //         'rdv' => $rdv,
+    //     ]);
+    // }
 
-    #[Route('/{id}/edit', name: 'app_medecin_rdv_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Rdv $rdv, EntityManagerInterface $entityManager): Response
-    {
-        $form = $this->createForm(Rdv2Type::class, $rdv);
-        $form->handleRequest($request);
+    // #[Route('/{rdv}/edit', name: 'app_medecin_rdv_edit', methods: ['GET', 'POST'])]
+    // public function edit(Request $request, Rdv $rdv, EntityManagerInterface $entityManager): Response
+    // {
+    //     $form = $this->createForm(Rdv2Type::class, $rdv);
+    //     $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
+    //     if ($form->isSubmitted() && $form->isValid()) {
+    //         $entityManager->flush();
 
-            return $this->redirectToRoute('app_medecin_rdv_index', [], Response::HTTP_SEE_OTHER);
-        }
+    //         return $this->redirectToRoute('app_medecin_rdv_index', [], Response::HTTP_SEE_OTHER);
+    //     }
 
-        return $this->render('medecin_rdv/edit.html.twig', [
-            'rdv' => $rdv,
-            'form' => $form,
-        ]);
-    }
+    //     return $this->render('medecin_rdv/edit.html.twig', [
+    //         'rdv' => $rdv,
+    //         'form' => $form,
+    //     ]);
+    // }
 
-    #[Route('/{id}', name: 'app_medecin_rdv_delete', methods: ['POST'])]
-    public function delete(Request $request, Rdv $rdv, EntityManagerInterface $entityManager): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$rdv->getId(), $request->request->get('_token'))) {
-            $entityManager->remove($rdv);
-            $entityManager->flush();
-        }
+    // #[Route('/{rdv}', name: 'app_medecin_rdv_delete', methods: ['POST'])]
+    // public function delete(Request $request, Rdv $rdv, EntityManagerInterface $entityManager): Response
+    // {
+    //     if ($this->isCsrfTokenValid('delete'.$rdv->getId(), $request->request->get('_token'))) {
+    //         $entityManager->remove($rdv);
+    //         $entityManager->flush();
+    //     }
 
-        return $this->redirectToRoute('app_medecin_rdv_index', [], Response::HTTP_SEE_OTHER);
-    }
+    //     return $this->redirectToRoute('app_medecin_rdv_index', [], Response::HTTP_SEE_OTHER);
+    // }
 }

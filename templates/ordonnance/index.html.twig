@@ -8,7 +8,7 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
+                {# <th>Id</th> #}
                 <th>CreatedAt</th>
                 <th>Title</th>
                 <th>Medicament</th>
@@ -21,7 +21,7 @@
         <tbody>
         {% for ordonnance in ordonnances %}
             <tr>
-                <td>{{ ordonnance.id }}</td>
+                {# <td>{{ ordonnance.id }}</td> #}
                 <td>{{ ordonnance.createdAt ? ordonnance.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ ordonnance.title }}</td>
                 <td>{{ ordonnance.medicament }}</td>

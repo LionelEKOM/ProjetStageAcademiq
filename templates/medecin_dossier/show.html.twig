@@ -144,7 +144,7 @@
 									<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false"></button>
 									<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 										<li>
-											<a class="dropdown-item" href="{{ path('app_ordonnance_new', {'id': dossier.id})}}">Ajouter</a>
+											<a class="dropdown-item" href="{{ path('app_antecedent_new', {'id': dossier.id})}}">Ajouter</a>
 										</li>
 									</ul>
 								</div>
@@ -245,7 +245,7 @@
 									<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false"></button>
 									<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 										<li>
-											<a class="dropdown-item" href="{{ path('app_ordonnance_new', {'id': dossier.id})}}">Ajouter</a>
+											<a class="dropdown-item" href="{{ path('app_examen_new', {'id': dossier.id})}}">Ajouter</a>
 										</li>
 									</ul>
 								</div>
@@ -334,8 +334,8 @@
 				</div>
 
 				<div class="d-grid gap-2 col-6 mx-auto">
-					{# <a  href="{{ path('app_medecin_dossier_index') }}"></a> #}
-					<a class="btn btn-warning" style="font-size: 25px" href="javascript:history.back()">Retour</a>
+					<a class="btn btn-warning mb-3"  href="{{ path('app_medecin_dossier_index') }}">Retour</a>
+					{# <a  style="font-size: 25px" href="javascript:history.back()"></a> #}
 				</div>
 			</div>
 		</div>
