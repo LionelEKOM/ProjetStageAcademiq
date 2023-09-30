@@ -50,9 +50,17 @@ class InfirmierDossierController extends AbstractController
     public function show(Dossier $dossier): Response
     {
         $rdvs = $dossier->getRdv();
+        $consultations = $dossier->getConsultations();
+        $examens = $dossier->getExamens();
+        $antecedents = $dossier->getAntecedents();
+        $ordonnances = $dossier->getOrdonnances();
         return $this->render('infirmier_dossier/show.html.twig', [
             'dossier' => $dossier,
-            'rdvs' => $rdvs
+            'rdvs' => $rdvs,
+            'consultations' => $consultations,
+            'examens' => $examens,
+            'antecedents' => $antecedents,
+            'ordonnances' => $ordonnances
 
         ]);
     }
